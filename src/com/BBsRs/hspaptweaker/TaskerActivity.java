@@ -25,6 +25,8 @@ public class TaskerActivity extends Activity {
 	
 	private TextView textButton;										//text button
     private ImageView mBackgroundShape;									//orange oval shape wrap text
+    
+    Menu mainMenu = null;												//global variable of menu 
 
 	/** Called when the activity is first created. */
 	@Override
@@ -46,8 +48,12 @@ public class TaskerActivity extends Activity {
 				if (isStarted){
 					onTaskServiceOn();									//animate button effect On
 					startService(new Intent(getApplicationContext(), TaskerService.class));
+					if (mainMenu!=null)									//disable menu
+						mainMenu.findItem(R.id.menu_settings).setEnabled(false);
 				} else {
 					onTaskServiceOff();									//animate button effect On
+					if (mainMenu!=null)									//enable menu
+						mainMenu.findItem(R.id.menu_settings).setEnabled(true);	
 					stopService(new Intent(getApplicationContext(), TaskerService.class));
 				}
 			}
@@ -58,6 +64,7 @@ public class TaskerActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_tasker, menu);
+		mainMenu = menu;												//grab menu to global variable
 		return true;
 	}
 
