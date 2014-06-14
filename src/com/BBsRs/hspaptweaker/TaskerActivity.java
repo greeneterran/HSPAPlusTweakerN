@@ -1,6 +1,8 @@
 package com.BBsRs.hspaptweaker;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,6 +60,18 @@ public class TaskerActivity extends Activity {
 				}
 			}
 		});
+	}
+	
+	@Override 
+	public void onResume(){
+		super.onResume();
+		if (isMyServiceRunning(TaskerService.class)) {					//check is service already running
+			isStarted = true;
+			onTaskServiceOn();
+		} else {
+			isStarted = false;
+			onTaskServiceOff();
+		}
 	}
 	
 	@Override															//create menu from menu_tasker
@@ -124,6 +138,16 @@ public class TaskerActivity extends Activity {
         float displayWidth  = outMetrics.widthPixels;
         return (Math.max(displayHeight, displayWidth) /
                 mContext.getResources().getDimensionPixelSize(R.dimen.button_size)) * 2;
+    }
+    
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
