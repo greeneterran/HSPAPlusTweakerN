@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -50,6 +52,23 @@ public class TaskerActivity extends Activity {
 				}
 			}
 		});
+	}
+	
+	@Override															//create menu from menu_tasker
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_tasker, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+	      case R.id.menu_settings:										//open settings on menu settings pressed
+	    	  //startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+	    	  break;
+		}
+		return true;
 	}
 	
 
