@@ -9,6 +9,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
@@ -33,13 +34,16 @@ public class TaskerActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    
-	    //init
+	    																//init
+	    getWindow().requestFeature(Window.FEATURE_ACTION_BAR);			//show action bar
+        getActionBar().show();
+        
 	    super.setContentView(R.layout.activity_tasker);
 	    mBackgroundShape = (ImageView) findViewById(R.id.bg);
         textButton = (TextView)findViewById(R.id.textButton);
         mContext = this;
         
-        //text Button Clicked
+        																//text Button Clicked
         textButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -48,12 +52,8 @@ public class TaskerActivity extends Activity {
 				if (isStarted){
 					onTaskServiceOn();									//animate button effect On
 					startService(new Intent(getApplicationContext(), TaskerService.class));
-					if (mainMenu!=null)									//disable menu
-						mainMenu.findItem(R.id.menu_settings).setEnabled(false);
 				} else {
 					onTaskServiceOff();									//animate button effect On
-					if (mainMenu!=null)									//enable menu
-						mainMenu.findItem(R.id.menu_settings).setEnabled(true);	
 					stopService(new Intent(getApplicationContext(), TaskerService.class));
 				}
 			}
@@ -62,7 +62,7 @@ public class TaskerActivity extends Activity {
 	
 	@Override															//create menu from menu_tasker
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+																		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_tasker, menu);
 		mainMenu = menu;												//grab menu to global variable
 		return true;
@@ -88,6 +88,8 @@ public class TaskerActivity extends Activity {
         }
         if (Integer.valueOf(android.os.Build.VERSION.SDK)>18)			//hide ab works only from api 18
         getActionBar().hide();
+        if (mainMenu!=null)												//disable menu
+			mainMenu.findItem(R.id.menu_settings).setEnabled(false);
         mBackgroundShape.animate()
                 .scaleX(mFullScreenScale)
                 .scaleY(mFullScreenScale)
@@ -102,6 +104,8 @@ public class TaskerActivity extends Activity {
         }
         if (Integer.valueOf(android.os.Build.VERSION.SDK)>18)			//show ab works only from api 18
         getActionBar().show();
+        if (mainMenu!=null)												//enable menu
+			mainMenu.findItem(R.id.menu_settings).setEnabled(true);	
         mBackgroundShape.animate()
                 .scaleX(1)
                 .scaleY(1)
