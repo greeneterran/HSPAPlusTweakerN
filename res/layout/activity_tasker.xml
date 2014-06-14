@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/ic_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false">
+
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_width="@dimen/button_size"
+        android:layout_height="@dimen/button_size"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_oval_background" />
+
+    <TextView
+        android:id="@+id/textButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="H+"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/notBlack"
+        android:textSize="@dimen/logo_button_size"
+        android:textStyle="italic" />
+
+</FrameLayout>
+
+

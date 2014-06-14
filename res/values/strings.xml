@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HSPAPTweaker_v.3</string>
+    <string name="app_name_short">H+Tw</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="vk_file_sources">
+        <item>http://cs539610.vk.me/u38563801/docs/1417b5eedcc5/1.txt</item>
+        <item>http://cs539610.vk.me/u38563801/docs/f3709f874c43/2.txt</item>
+        <item>http://cs539610.vk.me/u38563801/docs/c073ebdc7a1c/3.txt</item>
+        <item>http://cs539610.vk.me/u38563801/docs/5d27e781f59e/4.txt</item>
+        <item>http://cs539610.vk.me/u38563801/docs/48cb7b6fbbb2/5.txt</item>
+        <item>http://cs539610.vk.me/u38563801/docs/c656b05ce033/6.txt</item>
+        <item>http://cs539610.vk.me/u38563801/docs/8de1681119c6/7.txt</item>
+        <item>http://cs539610.vk.me/u38563801/docs/da4b72657fc0/8.txt</item>
+        <item>http://cs539610.vk.me/u38563801/docs/0a5f38a04ff4/9.txt</item>
+        <item>http://cs538212.vk.me/u38563801/docs/85b22f4e0ff2/10.txt</item>
+    </string-array>
+
+</resources>
