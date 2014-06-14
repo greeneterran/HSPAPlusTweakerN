@@ -50,8 +50,7 @@ public class TaskerActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				isStarted=!isStarted;
-				if (isStarted){
+				if (!isStarted){
 					onTaskServiceOn();									//animate button effect On
 					startService(new Intent(getApplicationContext(), TaskerService.class));
 				} else {
@@ -66,10 +65,8 @@ public class TaskerActivity extends Activity {
 	public void onResume(){
 		super.onResume();
 		if (isMyServiceRunning(TaskerService.class)) {					//check is service already running
-			isStarted = true;
 			onTaskServiceOn();
 		} else {
-			isStarted = false;
 			onTaskServiceOff();
 		}
 	}
@@ -94,6 +91,7 @@ public class TaskerActivity extends Activity {
 	
 
     private void onTaskServiceOn() {
+    	isStarted = true;
         if (mBackgroundShape == null) {
             return;
         }
@@ -113,6 +111,7 @@ public class TaskerActivity extends Activity {
     }
 
     private void onTaskServiceOff() {
+    	isStarted = false;
         if (mBackgroundShape == null) {
             return;
         }
