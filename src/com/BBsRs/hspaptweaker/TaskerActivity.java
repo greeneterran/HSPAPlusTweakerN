@@ -65,7 +65,7 @@ public class TaskerActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 	      case R.id.menu_settings:										//open settings on menu settings pressed
-	    	  //startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+	    	  startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
 	    	  break;
 		}
 		return true;

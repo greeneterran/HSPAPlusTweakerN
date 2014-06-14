@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+     <PreferenceCategory 
+    android:title="@string/main">
+    
+         <ListPreference
+        android:key="downloadSource"
+        android:title="@string/downloadSource"
+        android:summary="@string/downloadSourceSummary" android:dialogTitle="@string/itstimetochooseDS" android:entries="@array/download_source" android:entryValues="@array/download_source_entries" android:defaultValue="1">
+    </ListPreference>
+    
+    <ListPreference
+        android:key="fileSize"
+        android:title="@string/fileSize"
+        android:summary="@string/fileSizeSummary" android:dialogTitle="@string/itstimetochoose" android:entries="@array/files_sizes" android:entryValues="@array/files_sizes_entries" android:defaultValue="1">
+    </ListPreference>
+    
+        <ListPreference
+            android:enabled="true"
+        android:key="downloadItnerval"
+        android:title="@string/downloadInterval"
+        android:summary="@string/downloadIntervalSummary" android:dialogTitle="@string/itstimetochooseDI" android:entries="@array/download_interval" android:entryValues="@array/download_interval_entries" android:defaultValue="1000">
+    </ListPreference>
+    
+        
+</PreferenceCategory>
+ </PreferenceScreen>
