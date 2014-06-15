@@ -39,6 +39,8 @@ public class TaskerActivity extends Activity {
 	    																//init
 	    getWindow().requestFeature(Window.FEATURE_ACTION_BAR);			//show action bar
         getActionBar().show();
+        getActionBar().setTitle(R.string.app_name);						//set title
+	    getActionBar().setIcon(android.R.color.transparent);			//set no icon
         
 	    super.setContentView(R.layout.activity_tasker);
 	    mBackgroundShape = (ImageView) findViewById(R.id.bg);
