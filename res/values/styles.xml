@@ -14,14 +14,14 @@
      You should have received a copy of the GNU General Public License
      along with this program; if not, write to the Free Software
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-     MA  02110-1301, USA.
--->
-<resources>
+     MA  02110-1301, USA.-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppTheme" parent="android:Theme.Holo">
         <item name="android:windowBackground">@drawable/ic_background</item>
         <item name="android:actionBarStyle">@style/Widget.ActionBar</item>
         <item name="android:actionButtonStyle">@style/Widget.ActionButton</item>
+        <item name="android:listViewStyle">@style/Widget.ListView</item>
     </style>
 
     <style name="Widget.ActionBar" parent="android:Widget.Holo.ActionBar">
@@ -29,7 +29,12 @@
     </style>
 
     <style name="Widget.ActionButton" parent="android:Widget.Holo.ActionButton">
-        <item name="android:background">@drawable/apptheme_list_selector_holo_dark</item>
+        <item name="android:background">@drawable/apptheme_action_button_selector_holo_dark</item>
+    </style>
+
+    <style name="Widget.ListView" parent="android:Widget.Holo.ListView">
+        <item name="android:listSelector">@drawable/apptheme_list_selector_holo_dark</item>
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
     </style>
 
     <style name="AppTheme.Translucent" parent="AppTheme">
