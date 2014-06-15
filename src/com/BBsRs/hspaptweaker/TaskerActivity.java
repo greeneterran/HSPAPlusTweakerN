@@ -98,7 +98,7 @@ public class TaskerActivity extends Activity {
         if (mFullScreenScale <= 0.0f) {
             mFullScreenScale = getMeasureScale();
         }
-        if (Integer.valueOf(android.os.Build.VERSION.SDK)>18)			//hide ab works only from api 18
+        if (Integer.valueOf(android.os.Build.VERSION.SDK)>18)			//hide ab works only from api 19
         getActionBar().hide();
         if (mainMenu!=null)												//disable menu
 			mainMenu.findItem(R.id.menu_settings).setEnabled(false);
@@ -115,7 +115,7 @@ public class TaskerActivity extends Activity {
         if (mBackgroundShape == null) {
             return;
         }
-        if (Integer.valueOf(android.os.Build.VERSION.SDK)>18)			//show ab works only from api 18
+        if (Integer.valueOf(android.os.Build.VERSION.SDK)>18)			//show ab works only from api 19
         getActionBar().show();
         if (mainMenu!=null)												//enable menu
 			mainMenu.findItem(R.id.menu_settings).setEnabled(true);	
@@ -127,7 +127,7 @@ public class TaskerActivity extends Activity {
         textButton.setTextColor(mContext.getResources().getColor(R.color.notBlack));
     }
     
-    private float getMeasureScale() {									//func returns wich size we need increase oval to wrap all screen
+    private float getMeasureScale() {									//func returns which size we need increase oval to wrap all screen
         WindowManager wm = getWindowManager();
         Display display = wm.getDefaultDisplay();
         DisplayMetrics outMetrics = new DisplayMetrics();
@@ -139,7 +139,7 @@ public class TaskerActivity extends Activity {
                 mContext.getResources().getDimensionPixelSize(R.dimen.button_size)) * 2;
     }
     
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
+    private boolean isMyServiceRunning(Class<?> serviceClass) {			//returns true is service running
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
