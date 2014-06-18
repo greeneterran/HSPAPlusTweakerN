@@ -14,6 +14,14 @@
         android:layout_gravity="center"
         android:src="@drawable/ic_oval_background" />
 
+    <ImageView
+        android:id="@+id/bg2"
+        android:layout_width="@dimen/button_size"
+        android:layout_height="@dimen/button_size"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_oval_background_reverted_full"
+        android:alpha="0.0" />
+    
     <TextView
         android:id="@+id/textButton"
         android:layout_width="wrap_content"
