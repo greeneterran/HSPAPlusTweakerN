@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="notBlack">#333</color>
-    <color name="notWhite">#ddd</color>
-    <color name="orange">#f80</color>
-    <color name="notOrange">#ffbf7a</color>
-    <color name="black">#000</color>
-    <color name="notBlackBg">#646464</color>
-</resources>
