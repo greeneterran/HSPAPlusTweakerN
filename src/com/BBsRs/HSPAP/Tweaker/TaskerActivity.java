@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -35,6 +37,8 @@ public class TaskerActivity extends Activity {
 		mContext = this;
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().show();
+        getActionBar().setTitle(R.string.app_name);					
+	    getActionBar().setIcon(android.R.color.transparent);
         
 		setContentView(R.layout.activity_tasker);
 		
@@ -50,6 +54,23 @@ public class TaskerActivity extends Activity {
             		onServiceOn();
             }
         });
+	}
+	
+	@Override															
+	public boolean onCreateOptionsMenu(Menu menu) {
+																		
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+	      case R.id.menu_settings:										
+	    	  startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+	    	  break;
+		}
+		return true;
 	}
 	
 	private void onServiceOn() {
