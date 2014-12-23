@@ -3,7 +3,10 @@ package com.BBsRs.HSPAP.Tweaker;
 
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -26,8 +29,6 @@ public class TaskerActivity extends Activity {
 	private ImageView mBackgroundShape;
 	private TextView mLightbulb;
 	
-	private boolean isRunning = false;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,16 +44,16 @@ public class TaskerActivity extends Activity {
 		mLightbulb.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-            	if (isRunning)
+            	if (isMyServiceRunning(TaskerService.class))
             		onServiceOff();
             	else
             		onServiceOn();
-            	isRunning = !isRunning;
             }
         });
 	}
 	
 	private void onServiceOn() {
+		startService(new Intent(getApplicationContext(), TaskerService.class));
         if (mBackgroundShape == null) {
             return;
         }
@@ -68,6 +69,7 @@ public class TaskerActivity extends Activity {
     }
 
     private void onServiceOff() {
+    	stopService(new Intent(getApplicationContext(), TaskerService.class));
         if (mBackgroundShape == null) {
             return;
         }
@@ -95,5 +97,15 @@ public class TaskerActivity extends Activity {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         mFullScreenScale = getMeasureScale();
+    }
+    
+    private boolean isMyServiceRunning(Class<?> serviceClass) {			//returns true is service running
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
