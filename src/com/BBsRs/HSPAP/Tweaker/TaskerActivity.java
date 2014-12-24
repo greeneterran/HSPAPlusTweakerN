@@ -29,7 +29,7 @@ import android.widget.TextView;
 public class TaskerActivity extends Activity {
 
 	private static final int ANIMATION_DURATION = 300;
-	private static final int ANIMATION_DURATION_ERROR = 1300;
+	private static final int ANIMATION_DURATION_ERROR = 600;
 	private float mFullScreenScale;
 	
 	private Context mContext;
