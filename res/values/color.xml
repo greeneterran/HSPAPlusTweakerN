@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_color">#f40</color>
+
+    <color name="bg_color">#f80</color>
     <color name="text_color_white">#fff</color>
     <color name="actionbar_background">#00000000</color>
+    <color name="black">#000</color>
+    <color name="notBlackBg">#646464</color>
+
 </resources>

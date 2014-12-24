@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -19,6 +20,8 @@ public class TaskerService extends Service {
 	
 	PowerManager pm;
 	PowerManager.WakeLock wl;
+	
+	SharedPreferences sPref;
 
 	public void onCreate() {
 		super.onCreate();
