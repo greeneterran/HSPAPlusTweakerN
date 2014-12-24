@@ -29,11 +29,13 @@ import android.widget.TextView;
 public class TaskerActivity extends Activity {
 
 	private static final int ANIMATION_DURATION = 300;
+	private static final int ANIMATION_DURATION_ERROR = 1300;
 	private float mFullScreenScale;
 	
 	private Context mContext;
 	
 	private ImageView mBackgroundShape;
+	private ImageView mBackgroundShape2;
 	private TextView mLightbulb;
 	private TextView mTextLogger;
 	private ScrollView mScrollView;
@@ -42,6 +44,7 @@ public class TaskerActivity extends Activity {
 	private int logLength = 0;
 	
 	SharedPreferences sPref;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class TaskerActivity extends Activity {
 		setContentView(R.layout.activity_tasker);
 		
 		mBackgroundShape = (ImageView) findViewById(R.id.bg);
+		mBackgroundShape2 = (ImageView) findViewById(R.id.bgTwo);
 		mLightbulb = (TextView) findViewById(R.id.lightbulb);
 		mTextLogger = (TextView) findViewById(R.id.textLogger);
 		mScrollView = (ScrollView) findViewById(R.id.scrollView1);
@@ -130,6 +134,32 @@ public class TaskerActivity extends Activity {
 	    		mTextLogger.setVisibility(View.GONE);
 	    		mScrollView.setVisibility(View.GONE);
 	    	}
+	    	
+	    	//pulse animation
+	    	if (sPref.getBoolean("showRedError", true)){
+	    	if (intent.getExtras().getBoolean("errorOccurred")) {
+		        mBackgroundShape2.animate()
+		        .alpha(1.0f)												//make second visible
+		        .setInterpolator(new AccelerateDecelerateInterpolator())
+		        .setDuration(ANIMATION_DURATION_ERROR);
+		        
+		        mBackgroundShape.animate()
+		        .alpha(0.0f)												//make  first invisible
+		        .setInterpolator(new AccelerateDecelerateInterpolator())
+		        .setDuration(ANIMATION_DURATION_ERROR);
+				} else {
+					mBackgroundShape.animate()
+			        .alpha(1.0f)											//make first visible
+			        .setInterpolator(new AccelerateDecelerateInterpolator())
+			        .setDuration(ANIMATION_DURATION_ERROR);
+			        
+			        mBackgroundShape2.animate()
+			        .alpha(0.0f)											//make second invisible
+			        .setInterpolator(new AccelerateDecelerateInterpolator())
+			        .setDuration(ANIMATION_DURATION_ERROR);
+				}
+	    	}
+
 	    }
 	};
 	
@@ -148,6 +178,11 @@ public class TaskerActivity extends Activity {
                 .scaleY(mFullScreenScale)
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .setDuration(ANIMATION_DURATION);
+        mBackgroundShape2.animate()
+        .scaleX(mFullScreenScale)
+        .scaleY(mFullScreenScale)
+        .setInterpolator(new AccelerateDecelerateInterpolator())
+        .setDuration(ANIMATION_DURATION);
     }
 
     private void onServiceOff() {
@@ -162,6 +197,11 @@ public class TaskerActivity extends Activity {
                 .scaleY(1)
                 .setInterpolator(new OvershootInterpolator())
                 .setDuration(ANIMATION_DURATION);
+        mBackgroundShape2.animate()
+        .scaleX(1)
+        .scaleY(1)
+        .setInterpolator(new OvershootInterpolator())
+        .setDuration(ANIMATION_DURATION);
     }
 	
     private float getMeasureScale() {

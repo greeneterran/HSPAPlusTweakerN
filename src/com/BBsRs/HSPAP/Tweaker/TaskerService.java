@@ -80,33 +80,42 @@ public class TaskerService extends Service {
 						Document doc = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/"+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+".txt").get();
 						Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageSuccess)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						i.putExtra("errorOccurred", false);
 						sendBroadcast(i);
 					} catch (NotFoundException e) {
+						if (sPref.getBoolean("stopOnError", false))
 						isNeedToStop=true;
     					Log.e(LOG_TAG, "data Error");
     					Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						i.putExtra("errorOccurred", true);
 						sendBroadcast(i);
     					e.printStackTrace();
     				} catch (IOException e) {
+    					if (sPref.getBoolean("stopOnError", false))
     					isNeedToStop=true;
     					Log.e(LOG_TAG, "Load Error");
     					Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						i.putExtra("errorOccurred", true);
 						sendBroadcast(i);
     					e.printStackTrace();
     				} catch (NullPointerException e) {
+    					if (sPref.getBoolean("stopOnError", false))
     					isNeedToStop=true;
     	        		Log.e(LOG_TAG, "null Load Error"); 
     	        		Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						i.putExtra("errorOccurred", true);
 						sendBroadcast(i);
     					e.printStackTrace();
     				} catch (Exception e) {
+    					if (sPref.getBoolean("stopOnError", false))
     					isNeedToStop=true;
     	        		Log.e(LOG_TAG, "other Load Error");
     	        		Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						i.putExtra("errorOccurred", true);
 						sendBroadcast(i);
     					e.printStackTrace();
     				}

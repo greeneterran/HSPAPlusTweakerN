@@ -27,6 +27,19 @@
             android:key="showLog"
             android:summary="@string/showLogsSummary"
             android:title="@string/showLogs" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="stopOnError"
+            android:summary="@string/stopOnErrorSummary"
+            android:title="@string/stopOnError" />
+    </PreferenceCategory>
+    
+        <PreferenceCategory android:title="@string/ui" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="showRedError"
+            android:summary="@string/showRedOnErrorSummary"
+            android:title="@string/showRedOnError" />
     </PreferenceCategory>
 
 </PreferenceScreen>
