@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class TaskerService extends Service {
@@ -24,6 +25,7 @@ public class TaskerService extends Service {
 	SharedPreferences sPref;
 
 	public void onCreate() {
+		sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		super.onCreate();
 	}
 
@@ -47,7 +49,8 @@ public class TaskerService extends Service {
 
 	public void startMission() {
 		if (!isNeedToStop) {													
-			CountDownTimer = new timer(1000, 1000); 			
+			CountDownTimer = new timer(Integer.parseInt(sPref.getString("downloadItnerval", getResources().getString(R.string.defaultDownloadInterval))), 
+										Integer.parseInt(sPref.getString("downloadItnerval", getResources().getString(R.string.defaultDownloadInterval)))); 			
 			
 			CountDownTimer.start(); 									
 		}
@@ -66,7 +69,7 @@ public class TaskerService extends Service {
 			Thread thr = new Thread(new Runnable() {
 				public void run() {
 					try {
-						Document doc = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/1.txt").get();
+						Document doc = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/"+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+".txt").get();
 						Log.i("23", doc.text());
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
