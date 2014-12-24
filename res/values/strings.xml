@@ -14,6 +14,8 @@
     <string name="itstimetochoose">Choose File size</string>
     <string name="itstimetochooseDS">Choose source server</string>
     <string name="itstimetochooseDI">Choose download interval</string>
+    <string name="showLogs">Show logs</string>
+    <string name="showLogsSummary">Will show last of 500 stroke of logs</string>
     
     <string name="defaultDownloadInterval">1000</string>
     <string name="defaultFileSize">1</string>

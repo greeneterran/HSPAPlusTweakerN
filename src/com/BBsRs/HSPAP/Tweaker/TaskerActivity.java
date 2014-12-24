@@ -9,7 +9,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Menu;
@@ -39,10 +41,13 @@ public class TaskerActivity extends Activity {
 	private String log = "";
 	private int logLength = 0;
 	
+	SharedPreferences sPref;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mContext = this;
+		sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().show();
         getActionBar().setTitle(R.string.app_name);					
@@ -71,6 +76,9 @@ public class TaskerActivity extends Activity {
     		onServiceOn();
     	else
     		onServiceOff();
+		
+		if(!(savedInstanceState == null))
+			log = savedInstanceState.getString("log");
 	}
 	
 	@Override															
@@ -96,19 +104,32 @@ public class TaskerActivity extends Activity {
 		unregisterReceiver(uiUpdated);
 	}
 	
+    @Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		 outState.putString("log", log);
+	}
+	
 	private BroadcastReceiver uiUpdated= new BroadcastReceiver() {
 
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
-	    	if (logLength<500)
-	    		log = log +"\n"+intent.getExtras().getString("lastLogStroke");
-	    	else {
-	    		log = intent.getExtras().getString("lastLogStroke");
-	    		logLength=0;
+	    	if (sPref.getBoolean("showLog", false)){
+	    		mTextLogger.setVisibility(View.VISIBLE);
+	    		mScrollView.setVisibility(View.VISIBLE);
+	    		if (logLength<500)
+	    			log = log +"\n"+intent.getExtras().getString("lastLogStroke");
+	    		else {
+	    			log = intent.getExtras().getString("lastLogStroke");
+	    			logLength=0;
+	    		}
+	    		logLength++;
+	    		mTextLogger.setText(log);
+	    		mScrollView.scrollTo(0, mScrollView.getBottom());
+	    	} else {
+	    		mTextLogger.setVisibility(View.GONE);
+	    		mScrollView.setVisibility(View.GONE);
 	    	}
-	    	logLength++;
-	        mTextLogger.setText(log);
-	        mScrollView.scrollTo(0, mScrollView.getBottom());
 	    }
 	};
 	

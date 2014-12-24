@@ -21,6 +21,12 @@
             android:summary="@string/downloadIntervalSummary"
             android:title="@string/downloadInterval" >
         </ListPreference>
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="showLog"
+            android:summary="@string/showLogsSummary"
+            android:title="@string/showLogs" />
     </PreferenceCategory>
 
 </PreferenceScreen>
