@@ -32,6 +32,11 @@
             android:key="stopOnError"
             android:summary="@string/stopOnErrorSummary"
             android:title="@string/stopOnError" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="startOnWiFiAPEnabling"
+            android:summary="@string/startOnWiFiAPEnablingSummary"
+            android:title="@string/startOnWiFiAPEnabling" />
     </PreferenceCategory>
     
         <PreferenceCategory android:title="@string/ui" >

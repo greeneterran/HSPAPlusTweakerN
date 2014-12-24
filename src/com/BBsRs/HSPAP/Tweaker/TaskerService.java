@@ -26,7 +26,7 @@ public class TaskerService extends Service {
 	SharedPreferences sPref;
 	
 	String LOG_TAG = "TakserServiceH+";
-
+	
 	public void onCreate() {
 		sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		super.onCreate();

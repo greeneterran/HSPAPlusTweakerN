@@ -21,6 +21,9 @@
     <string name="stopOnErrorSummary">Stop if an error occerred</string>
     <string name="showRedOnError">Pulse Red when error occurred</string>
     <string name="showRedOnErrorSummary">when an error occurred windows throws red</string>
+    <string name="startOnWiFiAPEnabling">Start on WIFI AP Enabling</string>
+    <string name="startOnWiFiAPEnablingSummary">service will start when wifi ap turns on</string>
+    
     
     <string name="defaultDownloadInterval">1000</string>
     <string name="defaultFileSize">1</string>

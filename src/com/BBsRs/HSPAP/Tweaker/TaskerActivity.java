@@ -76,13 +76,17 @@ public class TaskerActivity extends Activity {
             }
         });
 		
+		if(!(savedInstanceState == null))
+			log = savedInstanceState.getString("log");
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
 		if (isMyServiceRunning(TaskerService.class))
     		onServiceOn();
     	else
     		onServiceOff();
-		
-		if(!(savedInstanceState == null))
-			log = savedInstanceState.getString("log");
 	}
 	
 	@Override															
