@@ -9,6 +9,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources.NotFoundException;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -23,6 +24,8 @@ public class TaskerService extends Service {
 	PowerManager.WakeLock wl;
 	
 	SharedPreferences sPref;
+	
+	String LOG_TAG = "TakserServiceH+";
 
 	public void onCreate() {
 		sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -39,6 +42,9 @@ public class TaskerService extends Service {
 
 	public void onDestroy() {
 		super.onDestroy();
+		Intent i = new Intent("DOWNLOAD_UPDATED");
+		i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageStopping));
+		sendBroadcast(i);
 		wl.release();
 		isNeedToStop = true;
 	}
@@ -53,6 +59,8 @@ public class TaskerService extends Service {
 										Integer.parseInt(sPref.getString("downloadItnerval", getResources().getString(R.string.defaultDownloadInterval)))); 			
 			
 			CountDownTimer.start(); 									
+		} else {
+			this.stopSelf();
 		}
 	}
 	
@@ -70,11 +78,38 @@ public class TaskerService extends Service {
 				public void run() {
 					try {
 						Document doc = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/"+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+".txt").get();
-						Log.i("23", doc.text());
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+						Intent i = new Intent("DOWNLOAD_UPDATED");
+						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageSuccess)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						sendBroadcast(i);
+					} catch (NotFoundException e) {
+						isNeedToStop=true;
+    					Log.e(LOG_TAG, "data Error");
+    					Intent i = new Intent("DOWNLOAD_UPDATED");
+						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						sendBroadcast(i);
+    					e.printStackTrace();
+    				} catch (IOException e) {
+    					isNeedToStop=true;
+    					Log.e(LOG_TAG, "Load Error");
+    					Intent i = new Intent("DOWNLOAD_UPDATED");
+						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						sendBroadcast(i);
+    					e.printStackTrace();
+    				} catch (NullPointerException e) {
+    					isNeedToStop=true;
+    	        		Log.e(LOG_TAG, "null Load Error"); 
+    	        		Intent i = new Intent("DOWNLOAD_UPDATED");
+						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						sendBroadcast(i);
+    					e.printStackTrace();
+    				} catch (Exception e) {
+    					isNeedToStop=true;
+    	        		Log.e(LOG_TAG, "other Load Error");
+    	        		Intent i = new Intent("DOWNLOAD_UPDATED");
+						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
+						sendBroadcast(i);
+    					e.printStackTrace();
+    				}
 				}
 			});
 			thr.start();

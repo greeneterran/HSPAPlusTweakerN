@@ -5,8 +5,10 @@ package com.BBsRs.HSPAP.Tweaker;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -19,6 +21,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class TaskerActivity extends Activity {
@@ -30,6 +33,11 @@ public class TaskerActivity extends Activity {
 	
 	private ImageView mBackgroundShape;
 	private TextView mLightbulb;
+	private TextView mTextLogger;
+	private ScrollView mScrollView;
+	
+	private String log = "";
+	private int logLength = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +47,15 @@ public class TaskerActivity extends Activity {
         getActionBar().show();
         getActionBar().setTitle(R.string.app_name);					
 	    getActionBar().setIcon(android.R.color.transparent);
+	    
+	    registerReceiver(uiUpdated, new IntentFilter("DOWNLOAD_UPDATED"));
         
 		setContentView(R.layout.activity_tasker);
 		
 		mBackgroundShape = (ImageView) findViewById(R.id.bg);
 		mLightbulb = (TextView) findViewById(R.id.lightbulb);
+		mTextLogger = (TextView) findViewById(R.id.textLogger);
+		mScrollView = (ScrollView) findViewById(R.id.scrollView1);
 		
 		mLightbulb.setOnClickListener(new OnClickListener() {
             @Override
@@ -54,6 +66,11 @@ public class TaskerActivity extends Activity {
             		onServiceOn();
             }
         });
+		
+		if (isMyServiceRunning(TaskerService.class))
+    		onServiceOn();
+    	else
+    		onServiceOff();
 	}
 	
 	@Override															
@@ -73,7 +90,30 @@ public class TaskerActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(uiUpdated);
+	}
+	
+	private BroadcastReceiver uiUpdated= new BroadcastReceiver() {
+
+	    @Override
+	    public void onReceive(Context context, Intent intent) {
+	    	if (logLength<500)
+	    		log = log +"\n"+intent.getExtras().getString("lastLogStroke");
+	    	else {
+	    		log = intent.getExtras().getString("lastLogStroke");
+	    		logLength=0;
+	    	}
+	    	logLength++;
+	        mTextLogger.setText(log);
+	        mScrollView.scrollTo(0, mScrollView.getBottom());
+	    }
+	};
+	
 	private void onServiceOn() {
+		if (!isMyServiceRunning(TaskerService.class))
 		startService(new Intent(getApplicationContext(), TaskerService.class));
         if (mBackgroundShape == null) {
             return;
@@ -90,6 +130,7 @@ public class TaskerActivity extends Activity {
     }
 
     private void onServiceOff() {
+    	if (isMyServiceRunning(TaskerService.class))
     	stopService(new Intent(getApplicationContext(), TaskerService.class));
         if (mBackgroundShape == null) {
             return;

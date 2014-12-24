@@ -17,6 +17,11 @@
     
     <string name="defaultDownloadInterval">1000</string>
     <string name="defaultFileSize">1</string>
+    
+    <string name="defaultLogMessageSuccess">Successfully!</string>
+    <string name="defaultLogMessageError">Error Occurred!</string>
+    <string name="defaultLogMessageStopping">Stopping service</string>
+    <string name="defaultLogMessageByte">byte</string>
 
     <string-array name="files_sizes_entries">
         <item>1</item>
