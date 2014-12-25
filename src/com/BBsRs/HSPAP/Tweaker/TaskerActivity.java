@@ -23,8 +23,13 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 public class TaskerActivity extends Activity {
 
@@ -47,6 +52,7 @@ public class TaskerActivity extends Activity {
 	
 	Menu mainMenu = null;	
 	
+	private AdView adView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +86,39 @@ public class TaskerActivity extends Activity {
 		
 		if(!(savedInstanceState == null))
 			log = savedInstanceState.getString("log");
+		
+		//!----------------------------------AD-----------------------------------------------------!
+		// Создание экземпляра adView.
+	    adView = new AdView(this);
+	    adView.setAdUnitId("ca-app-pub-0799144907631986/4032874175");
+	    adView.setAdSize(AdSize.BANNER);
+
+	    // Поиск разметки LinearLayout (предполагается, что ей был присвоен
+	    // атрибут android:id="@+id/mainLayout").
+	    LinearLayout layout = (LinearLayout)findViewById(R.id.mainRtLt);
+
+	    // Добавление в разметку экземпляра adView.
+	    layout.addView(adView);
+
+	    // Инициирование общего запроса.
+	    AdRequest adRequest = new AdRequest.Builder().build();
+
+	    // Загрузка adView с объявлением.
+	    adView.loadAd(adRequest);
+		//!----------------------------------AD-----------------------------------------------------!
+
 	}
+	
+	@Override
+	  public void onPause() {
+	    adView.pause();
+	    super.onPause();
+	  }
 	
 	@Override
 	public void onResume() {
 		super.onResume();
+		adView.resume();
 		if (isMyServiceRunning(TaskerService.class))
     		onServiceOn();
     	else
@@ -112,6 +146,7 @@ public class TaskerActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		adView.destroy();
 		unregisterReceiver(uiUpdated);
 	}
 	
