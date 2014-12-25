@@ -10,7 +10,7 @@ public class SettingsActivity extends PreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    getActionBar().setTitle(R.string.settings);						
+	    getActionBar().setTitle(R.string.action_settings);						
 	    getActionBar().setIcon(android.R.color.transparent);
 	    addPreferencesFromResource(R.xml.preferences);
 	    // TODO Auto-generated method stub
