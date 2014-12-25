@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HSPA+ Tweaker</string>
+    <string name="action_settings">Настройки</string>
+    <string name="fileSize">Размер файла для загрузки</string>
+    <string name="downloadInterval">Интервал для загрузки</string>
+    <string name="downloadSource">Сервер загрузки</string>
+    <string name="main">Основные</string>
+    <string name="ui">Интерфейс</string>
+    <string name="fileSizeSummary">Какого размера файл вы хотите загружать</string>
+    <string name="downloadIntervalSummary">Какой интервал в мсек. для загрузки файлов</string>
+    <string name="downloadSourceSummary">Какой сервер использовать для загрузки</string>
+    <string name="itstimetochoose">Выберете размер файла</string>
+    <string name="itstimetochooseDS">Выберете сервер</string>
+    <string name="itstimetochooseDI">Выберете интервал</string>
+    <string name="showLogs">Показывать лог</string>
+    <string name="showLogsSummary">Будет показываться последние 500 строк лога</string>
+    <string name="stopOnError">Останавливаться на ошибках</string>
+    <string name="stopOnErrorSummary">Сервис остановится, если случится ошибка</string>
+    <string name="showRedOnError">Закрасить окно красным, если случится ошибка</string>
+    <string name="showRedOnErrorSummary">Когда случится ошибка, окно станет красным</string>
+    <string name="startOnWiFiAPEnabling">Автостарт с раздачей интернета по wifi</string>
+    <string name="startOnWiFiAPEnablingSummary">Сервис запустится вместе с раздачей интернета по wifi</string>
+    
+    
+    <string name="defaultDownloadInterval">1000</string>
+    <string name="defaultFileSize">1</string>
+    
+    <string name="defaultLogMessageSuccess">Успешно!</string>
+    <string name="defaultLogMessageError">Случилась ошибка!</string>
+    <string name="defaultLogMessageStopping">Остановка сервиса</string>
+    <string name="defaultLogMessageByte">байт</string>
+
+    <string-array name="files_sizes_entries">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="files_sizes">
+        <item>1 байт</item>
+        <item>2 байта</item>
+        <item>3 байта</item>
+        <item>4 байта</item>
+        <item>5 байтов</item>
+        <item>6 байтов</item>
+        <item>7 байтов</item>
+        <item>8 байтов</item>
+        <item>9 байтов</item>
+        <item>10 байтов</item>
+    </string-array>
+    <string-array name="download_interval_entries">
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3500</item>
+        <item>4000</item>
+        <item>4500</item>
+        <item>5000</item>
+    </string-array>
+    <string-array name="download_interval">
+        <item>400 мсек</item>
+        <item>500 мсек</item>
+        <item>600 мсек</item>
+        <item>700 мсек</item>
+        <item>800 мсек</item>
+        <item>900 мсек</item>
+        <item>1 сек</item>
+        <item>1 сек and 500 мсек</item>
+        <item>2 сек</item>
+        <item>2 сек and 500 мсек</item>
+        <item>3 сек</item>
+        <item>3 сек and 500 мсек</item>
+        <item>4 сек</item>
+        <item>4 сек and 500 мсек</item>
+        <item>5 сек</item>
+    </string-array>
+
+</resources>

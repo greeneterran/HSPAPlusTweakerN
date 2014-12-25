@@ -18,7 +18,7 @@
     <string name="showLogsSummary">Will show last 500 lines of logs</string>
     <string name="stopOnError">Stop on error</string>
     <string name="stopOnErrorSummary">Stop if an error occerred</string>
-    <string name="showRedOnError">Draw red when error occurred</string>
+    <string name="showRedOnError">Draw window red when error occurred</string>
     <string name="showRedOnErrorSummary">When an error occurred window become red</string>
     <string name="startOnWiFiAPEnabling">Autostart with wifi hotspot</string>
     <string name="startOnWiFiAPEnablingSummary">service will start when wifi hotspot turns on</string>
