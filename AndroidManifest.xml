@@ -31,9 +31,12 @@
 
         <service android:name="TaskerService" >
         </service>
-        <activity android:name="SettingsActivity"></activity>
-        <receiver android:name="WiFiAPReceiver">
-            <intent-filter>  
+
+        <activity android:name="SettingsActivity" >
+        </activity>
+
+        <receiver android:name="WiFiAPReceiver" >
+            <intent-filter>
                 <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
             </intent-filter>
         </receiver>

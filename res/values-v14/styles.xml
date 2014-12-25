@@ -1,0 +1,34 @@
+<resources>
+    <style name="AppTheme" parent="android:Theme.Holo">
+        <item name="android:windowBackground">@drawable/ic_background</item>
+        <item name="android:actionBarStyle">@style/Widget.ActionBar</item>
+        <item name="android:actionButtonStyle">@style/Widget.ActionButton</item>
+        <item name="android:listViewStyle">@style/Widget.ListView</item>
+    </style>
+
+    <style name="AppTheme.Translucent" parent="AppTheme">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTitleSize">0dp</item>
+    </style>
+
+    <style name="Widget.ActionBar" parent="android:Widget.Holo.ActionBar">
+        <item name="android:background">@drawable/apptheme_tab_unselected_holo</item>
+        <item name="android:titleTextStyle">@style/Widget.ActionBar.Title</item>
+    </style>
+    
+    <style name="Widget.ActionBar.Title" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/bg_color</item>
+    </style>
+
+    <style name="Widget.ActionButton" parent="android:Widget.Holo.ActionButton">
+        <item name="android:background">@drawable/apptheme_list_selector_holo_dark</item>
+    </style>
+
+    <style name="Widget.ListView" parent="android:Widget.Holo.ListView">
+        <item name="android:listSelector">@drawable/apptheme_list_selector_holo_dark</item>
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+    </style>
+    
+    
+</resources>
