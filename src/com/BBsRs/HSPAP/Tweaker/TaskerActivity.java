@@ -63,7 +63,9 @@ public class TaskerActivity extends Activity {
 	
 	Menu mainMenu = null;	
 	
+	//!----------------------------------AD-----------------------------------------------------!
 	private AdView adView;
+	//!----------------------------------AD-----------------------------------------------------!
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
