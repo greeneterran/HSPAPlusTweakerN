@@ -136,7 +136,7 @@ public class TaskerActivity extends Activity {
 	    		}
 	    		logLength++;
 	    		mTextLogger.setText(log);
-	    		mScrollView.scrollTo(0, mScrollView.getBottom());
+	    		mScrollView.scrollTo(0, mTextLogger.getBottom());
 	    	} else {
 	    		mTextLogger.setVisibility(View.GONE);
 	    		mScrollView.setVisibility(View.GONE);
