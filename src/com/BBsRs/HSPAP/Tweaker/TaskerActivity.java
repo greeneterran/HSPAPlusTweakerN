@@ -27,11 +27,22 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 public class TaskerActivity extends Activity {
+	
+	//!----------------------------------BILLING-----------------------------------------------------!
+		// PRODUCT & SUBSCRIPTION IDS
+	    private static final String PRODUCT_ID = "ad_disabler";
+	    private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzEkpr/BGK3QP6wKLoC4k+M6GEkC9KM6QJrZlku4YLEB9i8R0zsXBLpT/ulOGeInfsxzm8v/MVh08d8dYiZG1XVBuLXVVhIM6woCTe/2Hp2gzRc2gnotKVIG6UuRu7BMa9ZGILodbqaDjPY3f6dFYylp57ye+XQTyK5GfjcBRA3a0N26+2Py1Goq2c4PTz4JsPoGNdf1h8GzCnhAO+9w4SyZbLPSH8xUEBo6f2KD6S5skSAeUIvdGUSGVvoUiG+eYlG3WzBOfGj0NBA8SzIFUDc1EFXOz6WY3TRu9ymPsnflRvZpj9OEFVoRX/aB+8R6GxhNtNQcVkKPMxvbh6HIaTQIDAQAB"; // PUT YOUR MERCHANT KEY HERE;
+
+		private BillingProcessor bp;
+		private boolean readyToPurchase = false;
+	//!----------------------------------BILLING-----------------------------------------------------!
 
 	private static final int ANIMATION_DURATION = 300;
 	private static final int ANIMATION_DURATION_ERROR = 600;
@@ -68,7 +79,30 @@ public class TaskerActivity extends Activity {
         
 		setContentView(R.layout.activity_tasker);
 		
-		mBackgroundShape = (ImageView) findViewById(R.id.bg);
+		 //!----------------------------------BILLING-----------------------------------------------------!
+	    bp = new BillingProcessor(this, LICENSE_KEY, new BillingProcessor.IBillingHandler() {
+            @Override
+            public void onProductPurchased(String productId, TransactionDetails details) {
+            }
+            @Override
+            public void onBillingError(int errorCode, Throwable error) {
+            }
+            @Override
+            public void onBillingInitialized() {
+            	if (!bp.isPurchased(PRODUCT_ID))
+            	showAd();
+                readyToPurchase = true;
+            }
+            @Override
+            public void onPurchaseHistoryRestored() {
+            }
+        });
+	    //!----------------------------------BILLING-----------------------------------------------------!
+	    
+	    if(!(savedInstanceState == null))
+			log = savedInstanceState.getString("log");
+	    
+	    mBackgroundShape = (ImageView) findViewById(R.id.bg);
 		mBackgroundShape2 = (ImageView) findViewById(R.id.bgTwo);
 		mLightbulb = (TextView) findViewById(R.id.lightbulb);
 		mTextLogger = (TextView) findViewById(R.id.textLogger);
@@ -83,11 +117,12 @@ public class TaskerActivity extends Activity {
             		onServiceOn();
             }
         });
-		
-		if(!(savedInstanceState == null))
-			log = savedInstanceState.getString("log");
+	}
+	
+	public void showAd(){
 		
 		//!----------------------------------AD-----------------------------------------------------!
+		if (!bp.isPurchased(PRODUCT_ID)){
 		// Создание экземпляра adView.
 	    adView = new AdView(this);
 	    adView.setAdUnitId("ca-app-pub-0799144907631986/4032874175");
@@ -99,18 +134,22 @@ public class TaskerActivity extends Activity {
 
 	    // Добавление в разметку экземпляра adView.
 	    layout.addView(adView);
-
+	    layout.setVisibility(View.VISIBLE);
 	    // Инициирование общего запроса.
 	    AdRequest adRequest = new AdRequest.Builder().build();
 
 	    // Загрузка adView с объявлением.
 	    adView.loadAd(adRequest);
+		} else {
+			LinearLayout layout = (LinearLayout)findViewById(R.id.mainRtLt);
+			layout.setVisibility(View.GONE);
+		}
 		//!----------------------------------AD-----------------------------------------------------!
-
 	}
 	
 	@Override
 	  public void onPause() {
+		if (adView != null)
 	    adView.pause();
 	    super.onPause();
 	  }
@@ -118,6 +157,7 @@ public class TaskerActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (adView != null)
 		adView.resume();
 		if (isMyServiceRunning(TaskerService.class))
     		onServiceOn();
@@ -146,6 +186,7 @@ public class TaskerActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		if (adView != null)
 		adView.destroy();
 		unregisterReceiver(uiUpdated);
 	}

@@ -45,6 +45,9 @@
             android:key="showRedError"
             android:summary="@string/showRedOnErrorSummary"
             android:title="@string/showRedOnError" />
+        <Preference
+            android:key="buyAd"
+            android:title="@string/buyAd" />
     </PreferenceCategory>
 
 </PreferenceScreen>

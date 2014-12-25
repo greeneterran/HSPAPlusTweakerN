@@ -22,6 +22,8 @@
     <string name="showRedOnErrorSummary">When an error occurred window become red</string>
     <string name="startOnWiFiAPEnabling">Autostart with wifi hotspot</string>
     <string name="startOnWiFiAPEnablingSummary">service will start when wifi hotspot turns on</string>
+    <string name="buyAd">Turn off Ad</string>
+    <string name="buyedAd">Ad successfully disabled!</string>
     
     
     <string name="defaultDownloadInterval">1000</string>

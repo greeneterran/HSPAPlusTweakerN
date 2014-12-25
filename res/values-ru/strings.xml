@@ -22,6 +22,8 @@
     <string name="showRedOnErrorSummary">Когда случится ошибка, окно станет красным</string>
     <string name="startOnWiFiAPEnabling">Автостарт с раздачей интернета по wifi</string>
     <string name="startOnWiFiAPEnablingSummary">Сервис запустится вместе с раздачей интернета по wifi</string>
+    <string name="buyAd">Отключить рекламу</string>
+    <string name="buyedAd">Реклама успешно выключена!</string>
     
     
     <string name="defaultDownloadInterval">1000</string>
