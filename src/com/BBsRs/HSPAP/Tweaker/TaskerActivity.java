@@ -45,6 +45,8 @@ public class TaskerActivity extends Activity {
 	
 	SharedPreferences sPref;
 	
+	Menu mainMenu = null;	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,7 @@ public class TaskerActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 																		
 		getMenuInflater().inflate(R.menu.main, menu);
+		mainMenu = menu;
 		return true;
 	}
 
@@ -176,7 +179,10 @@ public class TaskerActivity extends Activity {
         if (mFullScreenScale <= 0.0f) {
             mFullScreenScale = getMeasureScale();
         }
+        if (Integer.valueOf(android.os.Build.VERSION.SDK)>18)
         getActionBar().hide();
+        if (mainMenu!=null)												//disable menu
+			mainMenu.findItem(R.id.menu_settings).setEnabled(false);
         mBackgroundShape.animate()
                 .scaleX(mFullScreenScale)
                 .scaleY(mFullScreenScale)
@@ -195,7 +201,10 @@ public class TaskerActivity extends Activity {
         if (mBackgroundShape == null) {
             return;
         }
+        if (Integer.valueOf(android.os.Build.VERSION.SDK)>18)
         getActionBar().show();
+        if (mainMenu!=null)												//disable menu
+			mainMenu.findItem(R.id.menu_settings).setEnabled(true);
         mBackgroundShape.animate()
                 .scaleX(1)
                 .scaleY(1)
