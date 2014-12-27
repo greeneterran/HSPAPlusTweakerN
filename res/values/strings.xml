@@ -20,10 +20,13 @@
     <string name="stopOnErrorSummary">Stop if an error occerred</string>
     <string name="showRedOnError">Draw window red when error occurred</string>
     <string name="showRedOnErrorSummary">When an error occurred window become red</string>
+    <string name="showPendingNotification">Show notification when service is running</string>
+    <string name="showPendingNotificationSummary">uncancelable pending notification in drawer</string>
     <string name="startOnWiFiAPEnabling">Autostart with wifi hotspot</string>
     <string name="startOnWiFiAPEnablingSummary">service will start when wifi hotspot turns on</string>
     <string name="buyAd">Turn off Ad</string>
     <string name="buyedAd">Ad successfully disabled!</string>
+    <string name="serviceRunning">Service is running!</string>
     
     
     <string name="defaultDownloadInterval">1000</string>

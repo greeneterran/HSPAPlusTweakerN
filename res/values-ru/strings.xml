@@ -20,15 +20,15 @@
     <string name="stopOnErrorSummary">Сервис остановится, если случится ошибка</string>
     <string name="showRedOnError">Закрасить окно красным, если случится ошибка</string>
     <string name="showRedOnErrorSummary">Когда случится ошибка, окно станет красным</string>
+    <string name="showPendingNotification">Показывать уведомление, когда сервис запущен</string>
+    <string name="showPendingNotificationSummary">Уведомление будет показываться всё время, пока сервис запущен</string>
     <string name="startOnWiFiAPEnabling">Автостарт с раздачей интернета по wifi</string>
     <string name="startOnWiFiAPEnablingSummary">Сервис запустится вместе с раздачей интернета по wifi</string>
     <string name="buyAd">Отключить рекламу</string>
     <string name="buyedAd">Реклама успешно выключена!</string>
-    
-    
+    <string name="serviceRunning">Сервис запущен!</string>
     <string name="defaultDownloadInterval">1000</string>
     <string name="defaultFileSize">1</string>
-    
     <string name="defaultLogMessageSuccess">Успешно!</string>
     <string name="defaultLogMessageError">Случилась ошибка!</string>
     <string name="defaultLogMessageStopping">Остановка сервиса</string>

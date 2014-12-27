@@ -5,6 +5,9 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -25,10 +28,13 @@ public class TaskerService extends Service {
 	
 	SharedPreferences sPref;
 	
+	NotificationManager mNotificationManager;
+	
 	String LOG_TAG = "TakserServiceH+";
 	
 	public void onCreate() {
 		sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		super.onCreate();
 	}
 
@@ -37,6 +43,8 @@ public class TaskerService extends Service {
 		wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
 		wl.acquire();
 		startMission();
+		if (sPref.getBoolean("showPendingNotification", true))
+		showPendingNotification();
 		return super.onStartCommand(intent, flags, startId);
 	}
 
@@ -47,6 +55,8 @@ public class TaskerService extends Service {
 		sendBroadcast(i);
 		wl.release();
 		isNeedToStop = true;
+		if (sPref.getBoolean("showPendingNotification", true))
+		mNotificationManager.cancelAll();
 	}
 
 	public IBinder onBind(Intent intent) {
@@ -62,6 +72,14 @@ public class TaskerService extends Service {
 		} else {
 			this.stopSelf();
 		}
+	}
+	
+	private void showPendingNotification(){
+	    Notification not = new Notification(R.drawable.ic_launcher, getResources().getString(R.string.serviceRunning), System.currentTimeMillis());
+	    PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, TaskerActivity.class), Notification.FLAG_ONGOING_EVENT);        
+	    not.flags = Notification.FLAG_ONGOING_EVENT;
+	    not.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), getResources().getString(R.string.serviceRunning), contentIntent);
+	    mNotificationManager.notify(1, not);
 	}
 	
 	private timer CountDownTimer; 										

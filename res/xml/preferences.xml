@@ -38,13 +38,18 @@
             android:summary="@string/startOnWiFiAPEnablingSummary"
             android:title="@string/startOnWiFiAPEnabling" />
     </PreferenceCategory>
-    
-        <PreferenceCategory android:title="@string/ui" >
+    <PreferenceCategory android:title="@string/ui" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="showRedError"
             android:summary="@string/showRedOnErrorSummary"
             android:title="@string/showRedOnError" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="showPendingNotification"
+            android:summary="@string/showPendingNotificationSummary"
+            android:title="@string/showPendingNotification" />
+
         <Preference
             android:key="buyAd"
             android:title="@string/buyAd" />
