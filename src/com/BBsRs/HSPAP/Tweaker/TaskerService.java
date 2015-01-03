@@ -29,8 +29,12 @@ public class TaskerService extends Service {
 	SharedPreferences sPref;
 	
 	NotificationManager mNotificationManager;
+	Notification not;
+	PendingIntent contentIntent;
 	
 	String LOG_TAG = "TakserServiceH+";
+	
+	int errorCounter = 0;
 	
 	public void onCreate() {
 		sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -39,12 +43,12 @@ public class TaskerService extends Service {
 	}
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		if (sPref.getBoolean("showPendingNotification", true))
+		showPendingNotification();
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
 		wl.acquire();
 		startMission();
-		if (sPref.getBoolean("showPendingNotification", true))
-		showPendingNotification();
 		return super.onStartCommand(intent, flags, startId);
 	}
 
@@ -67,16 +71,17 @@ public class TaskerService extends Service {
 		if (!isNeedToStop) {													
 			CountDownTimer = new timer(Integer.parseInt(sPref.getString("downloadItnerval", getResources().getString(R.string.defaultDownloadInterval))), 
 										Integer.parseInt(sPref.getString("downloadItnerval", getResources().getString(R.string.defaultDownloadInterval)))); 			
-			
-			CountDownTimer.start(); 									
+			CountDownTimer.start(); 	
+			not.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), getResources().getString(R.string.serviceRunning)+" "+String.valueOf(errorCounter)+" "+getResources().getString(R.string.errors), contentIntent);
+		    mNotificationManager.notify(1, not);
 		} else {
 			this.stopSelf();
 		}
 	}
 	
 	private void showPendingNotification(){
-	    Notification not = new Notification(R.drawable.ic_launcher, getResources().getString(R.string.serviceRunning), System.currentTimeMillis());
-	    PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, TaskerActivity.class), Notification.FLAG_ONGOING_EVENT);        
+	    not = new Notification(R.drawable.ic_launcher, getResources().getString(R.string.serviceRunning), System.currentTimeMillis());
+	    contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, TaskerActivity.class), Notification.FLAG_ONGOING_EVENT);        
 	    not.flags = Notification.FLAG_ONGOING_EVENT;
 	    not.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), getResources().getString(R.string.serviceRunning), contentIntent);
 	    mNotificationManager.notify(1, not);
@@ -107,6 +112,7 @@ public class TaskerService extends Service {
     					Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
 						i.putExtra("errorOccurred", true);
+						errorCounter++;
 						sendBroadcast(i);
     					e.printStackTrace();
     				} catch (IOException e) {
@@ -116,6 +122,7 @@ public class TaskerService extends Service {
     					Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
 						i.putExtra("errorOccurred", true);
+						errorCounter++;
 						sendBroadcast(i);
     					e.printStackTrace();
     				} catch (NullPointerException e) {
@@ -125,6 +132,7 @@ public class TaskerService extends Service {
     	        		Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
 						i.putExtra("errorOccurred", true);
+						errorCounter++;
 						sendBroadcast(i);
     					e.printStackTrace();
     				} catch (Exception e) {
@@ -134,6 +142,7 @@ public class TaskerService extends Service {
     	        		Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageError)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
 						i.putExtra("errorOccurred", true);
+						errorCounter++;
 						sendBroadcast(i);
     					e.printStackTrace();
     				}

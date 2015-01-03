@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">HSPA+ Tweaker</string>
+    <string name="errors">Ошибок</string>
     <string name="action_settings">Настройки</string>
     <string name="fileSize">Размер файла для загрузки</string>
     <string name="downloadInterval">Интервал для загрузки</string>
