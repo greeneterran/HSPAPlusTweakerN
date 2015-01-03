@@ -187,10 +187,12 @@ public class TaskerActivity extends Activity {
 	
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
 		if (adView != null)
 		adView.destroy();
 		unregisterReceiver(uiUpdated);
+		if (bp != null) 
+	    bp.release();
+		super.onDestroy();
 	}
 	
     @Override
@@ -321,5 +323,11 @@ public class TaskerActivity extends Activity {
             }
         }
         return false;
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
     }
 }

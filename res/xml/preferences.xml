@@ -50,6 +50,9 @@
             android:summary="@string/showPendingNotificationSummary"
             android:title="@string/showPendingNotification" />
 
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/ad" >
         <Preference
             android:key="buyAd"
             android:title="@string/buyAd" />

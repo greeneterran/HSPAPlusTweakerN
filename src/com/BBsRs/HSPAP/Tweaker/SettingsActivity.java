@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 
+
 public class SettingsActivity extends PreferenceActivity {
 	
 	
@@ -73,5 +74,18 @@ public class SettingsActivity extends PreferenceActivity {
 
 		});
 	}
+	
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+    }
+    
+    @Override
+    public void onDestroy() {
+        if (bp != null) 
+            bp.release();
+        super.onDestroy();
+    }
 
 }

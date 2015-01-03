@@ -8,6 +8,7 @@
     <string name="downloadSource">Сервер загрузки</string>
     <string name="main">Основные</string>
     <string name="ui">Интерфейс</string>
+    <string name="ad">Реклама</string>
     <string name="fileSizeSummary">Какого размера файл вы хотите загружать</string>
     <string name="downloadIntervalSummary">Какой интервал в мсек. для загрузки файлов</string>
     <string name="downloadSourceSummary">Какой сервер использовать для загрузки</string>

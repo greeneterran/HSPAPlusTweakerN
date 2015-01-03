@@ -8,6 +8,7 @@
     <string name="downloadSource">Source to download</string>
     <string name="main">Base</string>
     <string name="ui">User Interface</string>
+    <string name="ad">Advertisement</string>
     <string name="fileSizeSummary">Which file by size you want to download</string>
     <string name="downloadIntervalSummary">Which itnerval to download files by msec</string>
     <string name="downloadSourceSummary">Which source to download files by server</string>
