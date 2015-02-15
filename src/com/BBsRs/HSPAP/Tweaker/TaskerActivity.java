@@ -127,7 +127,7 @@ public class TaskerActivity extends Activity {
 		if (!bp.isPurchased(PRODUCT_ID)){
 		// Создание экземпляра adView.
 	    adView = new AdView(this);
-	    adView.setAdUnitId("ca-app-pub-0799144907631986/4032874175");
+	    adView.setAdUnitId("ca-app-pub-6690318766939525/6003666896");
 	    adView.setAdSize(AdSize.BANNER);
 
 	    // Поиск разметки LinearLayout (предполагается, что ей был присвоен
