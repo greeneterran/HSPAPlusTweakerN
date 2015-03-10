@@ -29,11 +29,8 @@
     <string name="buyAd">Turn off Ad</string>
     <string name="buyedAd">Ad successfully disabled!</string>
     <string name="serviceRunning">Service is running!</string>
-    
-    
     <string name="defaultDownloadInterval">1000</string>
     <string name="defaultFileSize">1</string>
-    
     <string name="defaultLogMessageSuccess">Successfully!</string>
     <string name="defaultLogMessageError">Error Occurred!</string>
     <string name="defaultLogMessageStopping">Stopping service</string>
@@ -96,6 +93,14 @@
         <item>4 sec</item>
         <item>4 sec and 500 msec</item>
         <item>5 sec</item>
+    </string-array>
+    <string-array name="download_source_entries">
+        <item>http://brothers-rovers.3dn.ru/HPlusTweaker/</item>
+        <item>https://raw.githubusercontent.com/RomzesRover/HSPAPlusTweakerN/master/hspap_files/</item>
+    </string-array>
+    <string-array name="download_source">
+        <item>brothers-rovers.3dn.ru</item>
+        <item>github.com</item>
     </string-array>
 
 </resources>

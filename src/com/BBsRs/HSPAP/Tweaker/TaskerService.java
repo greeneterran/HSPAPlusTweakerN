@@ -102,7 +102,7 @@ public class TaskerService extends Service {
 			Thread thr = new Thread(new Runnable() {
 				public void run() {
 					try {
-						Document doc = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/"+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+".txt").get();
+						Document doc = Jsoup.connect(sPref.getString("downloadSource", "http://brothers-rovers.3dn.ru/HPlusTweaker/")+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+".txt").get();
 						Intent i = new Intent("DOWNLOAD_UPDATED");
 						i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageSuccess)+" "+sPref.getString("fileSize", getResources().getString(R.string.defaultFileSize))+" "+getResources().getString(R.string.defaultLogMessageByte));
 						i.putExtra("errorOccurred", false);

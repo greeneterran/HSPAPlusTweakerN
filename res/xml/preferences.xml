@@ -3,6 +3,15 @@
 
     <PreferenceCategory android:title="@string/main" >
         <ListPreference
+            android:defaultValue="http://brothers-rovers.3dn.ru/HPlusTweaker/"
+            android:dialogTitle="@string/itstimetochooseDS"
+            android:entries="@array/download_source"
+            android:entryValues="@array/download_source_entries"
+            android:key="downloadSource"
+            android:summary="@string/downloadSourceSummary"
+            android:title="@string/downloadSource" >
+        </ListPreference>
+        <ListPreference
             android:defaultValue="1"
             android:dialogTitle="@string/itstimetochoose"
             android:entries="@array/files_sizes"
@@ -49,9 +58,7 @@
             android:key="showPendingNotification"
             android:summary="@string/showPendingNotificationSummary"
             android:title="@string/showPendingNotification" />
-
     </PreferenceCategory>
-    
     <PreferenceCategory android:title="@string/ad" >
         <Preference
             android:key="buyAd"

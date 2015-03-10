@@ -94,5 +94,13 @@
         <item>4 сек and 500 мсек</item>
         <item>5 сек</item>
     </string-array>
+    <string-array name="download_source_entries">
+        <item>http://brothers-rovers.3dn.ru/HPlusTweaker/</item>
+        <item>https://raw.githubusercontent.com/RomzesRover/HSPAPlusTweakerN/master/hspap_files/</item>
+    </string-array>
+    <string-array name="download_source">
+        <item>brothers-rovers.3dn.ru</item>
+        <item>github.com</item>
+    </string-array>
 
 </resources>
