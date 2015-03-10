@@ -133,7 +133,7 @@ public class TaskerActivity extends Activity {
 	    // Поиск разметки LinearLayout (предполагается, что ей был присвоен
 	    // атрибут android:id="@+id/mainLayout").
 	    LinearLayout layout = (LinearLayout)findViewById(R.id.mainRtLt);
-
+	    
 	    // Добавление в разметку экземпляра adView.
 	    layout.addView(adView);
 	    layout.setVisibility(View.VISIBLE);
