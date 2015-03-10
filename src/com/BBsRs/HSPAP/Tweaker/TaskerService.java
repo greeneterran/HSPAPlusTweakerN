@@ -73,7 +73,7 @@ public class TaskerService extends Service {
 										Integer.parseInt(sPref.getString("downloadItnerval", getResources().getString(R.string.defaultDownloadInterval)))); 			
 			CountDownTimer.start(); 
 			if (sPref.getBoolean("showPendingNotification", true)){
-			not.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), getResources().getString(R.string.serviceRunning)+" "+String.valueOf(errorCounter)+" "+getResources().getString(R.string.errors), contentIntent);
+			not.setLatestEventInfo(getApplicationContext(), getResources().getString(R.string.app_name), getResources().getString(R.string.serviceRunning)+" "+getResources().getString(R.string.errors)+": "+String.valueOf(errorCounter), contentIntent);
 		    mNotificationManager.notify(1, not);
 			}
 		} else {
