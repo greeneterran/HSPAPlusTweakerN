@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -156,15 +157,23 @@ public class TaskerActivity extends Activity {
 	    super.onPause();
 	  }
 	
+	private final Handler handler = new Handler();
+	
 	@Override
 	public void onResume() {
 		super.onResume();
 		if (adView != null)
 		adView.resume();
-		if (isMyServiceRunning(TaskerService.class))
-    		onServiceOn();
-    	else
-    		onServiceOff();
+		
+		handler.postDelayed(new Runnable(){
+			@Override
+			public void run() {
+				if (isMyServiceRunning(TaskerService.class))
+		    		onServiceOn();
+		    	else
+		    		onServiceOff();
+			}
+		}, 500);
 	}
 	
 	@Override															
