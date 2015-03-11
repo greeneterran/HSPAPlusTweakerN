@@ -57,7 +57,8 @@ public class TaskerService extends Service {
 		Intent i = new Intent("DOWNLOAD_UPDATED");
 		i.putExtra("lastLogStroke",getResources().getString(R.string.defaultLogMessageStopping));
 		sendBroadcast(i);
-		wl.release();
+		if (wl !=null)
+			wl.release();
 		isNeedToStop = true;
 		if (sPref.getBoolean("showPendingNotification", true))
 		mNotificationManager.cancelAll();
