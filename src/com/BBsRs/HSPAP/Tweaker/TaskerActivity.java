@@ -4,6 +4,8 @@ package com.BBsRs.HSPAP.Tweaker;
 
 import java.util.Calendar;
 
+import org.jsoup.Jsoup;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -19,6 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -230,7 +233,7 @@ public class TaskerActivity extends Activity {
 		if (!bp.isPurchased(PRODUCT_ID)){
 		// Создание экземпляра adView.
 	    adView = new AdView(this);
-	    adView.setAdUnitId("ca-app-pub-6690318766939525/6003666896");
+	    adView.setAdUnitId(sPref.getString("adsources", "ca-app-pub-6690318766939525/6003666896"));
 	    adView.setAdSize(AdSize.BANNER);
 
 	    // Поиск разметки LinearLayout (предполагается, что ей был присвоен
@@ -250,6 +253,23 @@ public class TaskerActivity extends Activity {
 			layout.setVisibility(View.GONE);
 		}
 		//!----------------------------------AD-----------------------------------------------------!
+		loadADsource();
+	}
+	
+	public void loadADsource(){
+		new Thread (new Runnable(){
+			@Override
+			public void run() {
+				String adSource = "ca-app-pub-6690318766939525/6003666896";
+				try {
+					adSource = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource.txt").timeout(5000).get().text();
+				} catch (Exception e){
+					adSource = "ca-app-pub-6690318766939525/6003666896";
+				}
+				
+				sPref.edit().putString("adsources", adSource).commit();
+			}
+		}).start();
 	}
 	
 	@Override
