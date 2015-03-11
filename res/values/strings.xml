@@ -23,7 +23,7 @@
     <string name="ui">User Interface</string>
     <string name="ad">Advertisement</string>
     <string name="fileSizeSummary">Which file by size you want to download</string>
-    <string name="downloadIntervalSummary">Which itnerval to download files by msec</string>
+    <string name="downloadIntervalSummary">Which interval to download files by msec</string>
     <string name="downloadSourceSummary">Which source to download files by server</string>
     <string name="itstimetochoose">Choose File size</string>
     <string name="itstimetochooseDS">Choose source server</string>
@@ -31,7 +31,7 @@
     <string name="showLogs">Show log</string>
     <string name="showLogsSummary">Will show last 500 lines of logs</string>
     <string name="stopOnError">Stop on error</string>
-    <string name="stopOnErrorSummary">Stop if an error occerred</string>
+    <string name="stopOnErrorSummary">Stop if an error occurred</string>
     <string name="showRedOnError">Draw window red when error occurred</string>
     <string name="showRedOnErrorSummary">When an error occurred window become red</string>
     <string name="showPendingNotification">Show notification when service is running</string>
