@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <string name="title_dialog">Love this app?</string>
+    <string name="review">Review on Google Play!</string>
+    <string name="review_summary">You will make an invaluable contribution to the development of the project!</string>
+    
+    <string name="share">Share this app</string>
+    <string name="share_summary">You can tell your friends and relatives how this app is helping you.</string>
+    <string name="share_text">I recommend this application for stabilizing mobile H+ connection.</string>
+    
+    <string name="buy">Buy the AD disabler</string>
+    <string name="buy_summary">You will support the developer, and You will enjoy with interface without advertisement.</string>
+     
 
     <string name="app_name">HSPA+ Tweaker</string>
     <string name="errors">Errors</string>

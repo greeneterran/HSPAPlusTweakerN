@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <string name="title_dialog">Нравится это приложение?</string>
+    <string name="review">Оцените в Google Play!</string>
+    <string name="review_summary">Вы сделаете неоценимый вклад в развитие проекта!</string>
+    
+    <string name="share">Поделиться приложением</string>
+    <string name="share_summary">Вы можете рассказать вашим друзьям и родственникам, как это приложение вам помогает.</string>
+    <string name="share_text">Я рекомендую это приложение для стабилизации мобильного H+ соединения.</string>
+    
+    <string name="buy">Купить отключение рекламы</string>
+    <string name="buy_summary">Вы поддержите разработчика, а так же будете наслаждаться интерфейсом без рекламы.</string>
 
     <string name="app_name">HSPA+ Tweaker</string>
     <string name="errors">Ошибок</string>

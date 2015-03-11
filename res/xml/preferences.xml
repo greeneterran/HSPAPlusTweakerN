@@ -62,7 +62,7 @@
     <PreferenceCategory android:title="@string/ad" >
         <Preference
             android:key="buyAd"
-            android:title="@string/buyAd" />
+            android:title="@string/buyAd" android:summary="@string/buy_summary"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

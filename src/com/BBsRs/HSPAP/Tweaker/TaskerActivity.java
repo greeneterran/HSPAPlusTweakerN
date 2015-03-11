@@ -2,19 +2,25 @@ package com.BBsRs.HSPAP.Tweaker;
 
 
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +31,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -64,6 +71,9 @@ public class TaskerActivity extends Activity {
 	
 	Menu mainMenu = null;	
 	
+    //alert dialog
+    AlertDialog alert = null;
+	
 	//!----------------------------------AD-----------------------------------------------------!
 	private AdView adView;
 	//!----------------------------------AD-----------------------------------------------------!
@@ -86,6 +96,9 @@ public class TaskerActivity extends Activity {
 	    bp = new BillingProcessor(this, LICENSE_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(String productId, TransactionDetails details) {
+            	startActivity(new Intent(getApplicationContext(), TaskerActivity.class));
+            	overridePendingTransition(0, 0);
+            	finish();
             }
             @Override
             public void onBillingError(int errorCode, Throwable error) {
@@ -120,6 +133,95 @@ public class TaskerActivity extends Activity {
             		onServiceOn();
             }
         });
+		
+		showDialog();
+	}
+	
+	//show an sponsor's to app
+		public void showDialog(){
+			
+			//if first time init shown date
+			if (sPref.getLong("shown_notification", 0) == 0){
+				sPref.edit().putLong("shown_notification", System.currentTimeMillis()).commit();
+			}
+			//if already shown disable it
+			if (sPref.getLong("shown_notification", 0) == -1){
+				return;
+			}
+			//calendar job
+			Calendar shownNotification = Calendar.getInstance();
+			shownNotification.setTimeInMillis(sPref.getLong("shown_notification", 0));
+			
+			Calendar currentDate = Calendar.getInstance();
+			currentDate.setTimeInMillis(System.currentTimeMillis());
+			
+			//add 1 weeks to shown notification
+			shownNotification.add(Calendar.DATE, +7);
+			
+			if (currentDate.before(shownNotification)){
+				return;
+			}
+			
+			//set flags that already shown
+			sPref.edit().putLong("shown_notification", -1).commit();
+			
+	 		final Context context = TaskerActivity.this; 								// create context
+	 		AlertDialog.Builder build = new AlertDialog.Builder(context); 				// create build for alert dialog
+	    	
+	    	LayoutInflater inflater = (LayoutInflater)context.getSystemService
+	    		      (Context.LAYOUT_INFLATER_SERVICE);
+	    	
+	    	View content = inflater.inflate(R.layout.dialog_content_sponsor, null);
+	    	
+	    		
+	    		
+	    	final RelativeLayout makeReview = (RelativeLayout)content.findViewById(R.id.make_review);
+	    	makeReview.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse("market://details?id=com.BBsRs.HSPAP.Tweaker"));
+					startActivity(intent);
+				}
+			});
+	    	
+	    	final RelativeLayout buy = (RelativeLayout)content.findViewById(R.id.buy);
+	    	if (bp.isPurchased(PRODUCT_ID))
+	    		buy.setVisibility(View.GONE);
+	    	buy.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (readyToPurchase)
+						bp.purchase(PRODUCT_ID);
+				}
+			});
+	    	
+	    	final RelativeLayout share = (RelativeLayout)content.findViewById(R.id.share);
+	    	share.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					try { 
+						Intent i = new Intent(Intent.ACTION_SEND);  
+						i.setType("text/plain");
+						i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+						String sAux = "\n"+getString(R.string.share_text)+"\n\n";
+						sAux = sAux + "https://play.google.com/store/apps/details?id=com.BBsRs.HSPAP.Tweaker \n\n";
+						i.putExtra(Intent.EXTRA_TEXT, sAux);  
+						startActivity(Intent.createChooser(i, "Share with"));
+					} catch(Exception e) {}   
+				}
+			});
+	    	
+	    	
+	    	build.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					alert.dismiss();
+				}
+			});
+	    	build.setView(content);
+	    	alert = build.create();															// show dialog
+	    	alert.show();
 	}
 	
 	public void showAd(){
