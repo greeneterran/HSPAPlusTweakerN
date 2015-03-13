@@ -170,6 +170,12 @@
 
     </RelativeLayout>
 
+    <CheckBox
+        android:id="@+id/dontshow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dont_show_again" />
+
 </LinearLayout>
 
 </LinearLayout>

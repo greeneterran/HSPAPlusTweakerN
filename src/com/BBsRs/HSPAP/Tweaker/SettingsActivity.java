@@ -58,7 +58,7 @@ public class SettingsActivity extends PreferenceActivity {
 	public void mainTask() {
 		@SuppressWarnings("deprecation")
 		Preference buyAd = findPreference("buyAd");
-		if (bp.isPurchased(PRODUCT_ID)) {buyAd.setSelectable(false); buyAd.setTitle(R.string.buyedAd);}
+		if (bp.isPurchased(PRODUCT_ID)) {buyAd.setSelectable(false); buyAd.setTitle(R.string.buyedAd); buyAd.setSummary(null);}
 		buyAd.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 			@Override

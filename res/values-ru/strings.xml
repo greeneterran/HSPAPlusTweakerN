@@ -2,6 +2,7 @@
 <resources>
     
     <string name="title_dialog">Нравится это приложение?</string>
+    <string name="dont_show_again">Больше не показывать</string>
     <string name="review">Оцените в Google Play!</string>
     <string name="review_summary">Вы сделаете неоценимый вклад в развитие проекта!</string>
     

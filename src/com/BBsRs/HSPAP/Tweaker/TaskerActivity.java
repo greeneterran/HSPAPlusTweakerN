@@ -20,8 +20,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.SyncStateContract.Constants;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,6 +32,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -143,14 +146,15 @@ public class TaskerActivity extends Activity {
 	//show an sponsor's to app
 		public void showDialog(){
 			
+			if (sPref.getBoolean("dont_show_again", false)){
+				return;
+			}
+			
 			//if first time init shown date
 			if (sPref.getLong("shown_notification", 0) == 0){
 				sPref.edit().putLong("shown_notification", System.currentTimeMillis()).commit();
 			}
-			//if already shown disable it
-			if (sPref.getLong("shown_notification", 0) == -1){
-				return;
-			}
+
 			//calendar job
 			Calendar shownNotification = Calendar.getInstance();
 			shownNotification.setTimeInMillis(sPref.getLong("shown_notification", 0));
@@ -158,15 +162,15 @@ public class TaskerActivity extends Activity {
 			Calendar currentDate = Calendar.getInstance();
 			currentDate.setTimeInMillis(System.currentTimeMillis());
 			
-			//add 1 weeks to shown notification
-			shownNotification.add(Calendar.DATE, +7);
+			//add 3 days to shown notification
+			shownNotification.add(Calendar.DATE, +3);
 			
 			if (currentDate.before(shownNotification)){
 				return;
 			}
 			
-			//set flags that already shown
-			sPref.edit().putLong("shown_notification", -1).commit();
+			//set new shown date
+			sPref.edit().putLong("shown_notification", System.currentTimeMillis()).commit();
 			
 	 		final Context context = TaskerActivity.this; 								// create context
 	 		AlertDialog.Builder build = new AlertDialog.Builder(context); 				// create build for alert dialog
@@ -176,7 +180,14 @@ public class TaskerActivity extends Activity {
 	    	
 	    	View content = inflater.inflate(R.layout.dialog_content_sponsor, null);
 	    	
-	    		
+	    	CheckBox dontShowAgain = (CheckBox)content.findViewById(R.id.dontshow);
+	    	dontShowAgain.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView,
+						boolean isChecked) {
+							sPref.edit().putBoolean("dont_show_again", isChecked).commit();
+				}
+	    	});
 	    		
 	    	final RelativeLayout makeReview = (RelativeLayout)content.findViewById(R.id.make_review);
 	    	makeReview.setOnClickListener(new View.OnClickListener() {
