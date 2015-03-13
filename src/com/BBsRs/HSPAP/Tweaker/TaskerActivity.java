@@ -248,12 +248,13 @@ public class TaskerActivity extends Activity {
 
 	    // Загрузка adView с объявлением.
 	    adView.loadAd(adRequest);
+	    
+	    loadADsource();
 		} else {
 			LinearLayout layout = (LinearLayout)findViewById(R.id.mainRtLt);
 			layout.setVisibility(View.GONE);
 		}
 		//!----------------------------------AD-----------------------------------------------------!
-		loadADsource();
 	}
 	
 	public void loadADsource(){
