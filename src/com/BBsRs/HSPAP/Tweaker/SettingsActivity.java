@@ -77,8 +77,10 @@ public class SettingsActivity extends PreferenceActivity {
 	
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!bp.handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);
+    	if(resultCode != RESULT_CANCELED){
+    		if (!bp.handleActivityResult(requestCode, resultCode, data))
+    			super.onActivityResult(requestCode, resultCode, data);
+    	}
     }
     
     @Override

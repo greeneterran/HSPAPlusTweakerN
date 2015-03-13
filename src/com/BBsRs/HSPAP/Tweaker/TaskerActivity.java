@@ -20,7 +20,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.provider.SyncStateContract.Constants;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -112,7 +111,7 @@ public class TaskerActivity extends Activity {
             @Override
             public void onBillingInitialized() {
             	if (!bp.isPurchased(PRODUCT_ID))
-            	showAd();
+            		showAd();
                 readyToPurchase = true;
             }
             @Override
@@ -242,7 +241,6 @@ public class TaskerActivity extends Activity {
 	}
 	
 	public void showAd(){
-		
 		//!----------------------------------AD-----------------------------------------------------!
 		if (!bp.isPurchased(PRODUCT_ID)){
 		// Создание экземпляра adView.
@@ -473,7 +471,9 @@ public class TaskerActivity extends Activity {
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!bp.handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);
+    	if(resultCode != RESULT_CANCELED){
+    		if (!bp.handleActivityResult(requestCode, resultCode, data))
+    			super.onActivityResult(requestCode, resultCode, data);
+    	}
     }
 }
