@@ -190,9 +190,12 @@ public class TaskerActivity extends Activity {
 	    	});
 	    		
 	    	final RelativeLayout makeReview = (RelativeLayout)content.findViewById(R.id.make_review);
+	    	if (sPref.getBoolean("make_review", false))
+	    		makeReview.setVisibility(View.GONE);
 	    	makeReview.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					sPref.edit().putBoolean("make_review", true).commit();
 					Intent intent = new Intent(Intent.ACTION_VIEW);
 					intent.setData(Uri.parse("market://details?id=com.BBsRs.HSPAP.Tweaker"));
 					startActivity(intent);
