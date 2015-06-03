@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,12 +40,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class TaskerActivity extends Activity {
 	
@@ -239,29 +242,113 @@ public class TaskerActivity extends Activity {
 	    	alert = build.create();															// show dialog
 	    	alert.show();
 	}
+		
+		//!----------------------------------AD-----------------------------------------------------!
+		/** StartAppAd object declaration */
+	private InterstitialAd interstitial;
+	
+	public void showIntersttial(){
+		if (interstitial !=null && interstitial.isLoaded()) {
+			interstitial.show();
+		}
+	}
+	//!----------------------------------AD-----------------------------------------------------!
 	
 	public void showAd(){
 		//!----------------------------------AD-----------------------------------------------------!
 		if (!bp.isPurchased(PRODUCT_ID)){
-		// Создание экземпляра adView.
-	    adView = new AdView(this);
-	    adView.setAdUnitId(sPref.getString("adsources", "ca-app-pub-6690318766939525/6003666896"));
-	    adView.setAdSize(AdSize.BANNER);
+			
+			final LinearLayout layout = (LinearLayout) this.findViewById(R.id.mainRtLt);
+			
+			new Thread (new Runnable(){
+				@Override
+				public void run() {
+					//load interstitial ad !!
+					try {
+						String AdSource1 = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource_between.txt").timeout(10000).get().text();
+						
+						if (AdSource1.equals(null) || AdSource1.length()>50 || AdSource1.length()<10){
+							Log.i("AD", "Problems with load AD !");
+							Log.i("AD", "herec1");
+						} else {
+							final String AdSourceFinalled = AdSource1;
+							handler.post(new Runnable(){
+								@Override
+								public void run() {
+									try {
+										// Создание межстраничного объявления.
+									    interstitial = new InterstitialAd(TaskerActivity.this);
+									    interstitial.setAdUnitId(AdSourceFinalled);
+		
+									    // Создание запроса объявления.
+									    AdRequest adRequest = new AdRequest.Builder().build();
+		
+									    // Запуск загрузки межстраничного объявления.
+									    interstitial.loadAd(adRequest);
+									} catch (Exception e){
+										Log.i("AD", "Problems with load AD !");
+										Log.i("AD", "herec2");
+									}
+								}
+							});
+						}
+					} catch (Exception e){
+						Log.i("AD", "Problems with load AD !");
+						Log.i("AD", "herec3");
+					}
+					
+					//load bottom banner
+					try {
+						String AdSource2 = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource.txt").timeout(10000).get().text();
+						
+						if (AdSource2.equals(null) || AdSource2.length()>50 || AdSource2.length()<10){
+							Log.i("AD", "Problems with load AD !");
+							Log.i("AD", "here1b");
+							handler.post(new Runnable(){
+								@Override
+								public void run() {
+									layout.setVisibility(View.GONE);
+								}
+							});
+						} else {
+							final String AdSourceFinalled = AdSource2;
+							handler.post(new Runnable(){
+								@Override
+								public void run() {
+									try {
+										// INIT adView.
+									    adView = new AdView(getApplicationContext());
+									    adView.setAdUnitId(AdSourceFinalled);
+									    adView.setAdSize(AdSize.BANNER);
+									    // adding adView to view.
+									    layout.addView(adView);
+									    layout.setVisibility(View.VISIBLE);
+									    // init base request.
+									    AdRequest adRequest = new AdRequest.Builder().build();
 
-	    // Поиск разметки LinearLayout (предполагается, что ей был присвоен
-	    // атрибут android:id="@+id/mainLayout").
-	    LinearLayout layout = (LinearLayout)findViewById(R.id.mainRtLt);
-	    
-	    // Добавление в разметку экземпляра adView.
-	    layout.addView(adView);
-	    layout.setVisibility(View.VISIBLE);
-	    // Инициирование общего запроса.
-	    AdRequest adRequest = new AdRequest.Builder().build();
-
-	    // Загрузка adView с объявлением.
-	    adView.loadAd(adRequest);
-	    
-	    loadADsource();
+									    // download AD.
+									    adView.loadAd(adRequest);
+									} catch (Exception e){
+										Log.i("AD", "Problems with load AD !");
+										Log.i("AD", "hereb2");
+										layout.setVisibility(View.GONE);
+									}
+								}
+							});
+						}
+						
+					} catch (Exception e){
+						Log.i("AD", "Problems with load AD !");
+						Log.i("AD", "hereb3");
+						handler.post(new Runnable(){
+							@Override
+							public void run() {
+								layout.setVisibility(View.GONE);
+							}
+						});
+					}
+				}
+			}).start();
 		} else {
 			LinearLayout layout = (LinearLayout)findViewById(R.id.mainRtLt);
 			layout.setVisibility(View.GONE);
@@ -269,20 +356,10 @@ public class TaskerActivity extends Activity {
 		//!----------------------------------AD-----------------------------------------------------!
 	}
 	
-	public void loadADsource(){
-		new Thread (new Runnable(){
-			@Override
-			public void run() {
-				String adSource = "ca-app-pub-6690318766939525/6003666896";
-				try {
-					adSource = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource.txt").timeout(5000).get().text();
-				} catch (Exception e){
-					adSource = "ca-app-pub-6690318766939525/6003666896";
-				}
-				
-				sPref.edit().putString("adsources", adSource).commit();
-			}
-		}).start();
+	@Override
+	public void onBackPressed(){
+		showIntersttial();
+		super.onBackPressed();
 	}
 	
 	@Override
