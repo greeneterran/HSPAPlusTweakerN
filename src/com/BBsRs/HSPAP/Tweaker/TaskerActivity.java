@@ -135,8 +135,15 @@ public class TaskerActivity extends Activity {
 		mLightbulb.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-            	if (isMyServiceRunning(TaskerService.class))
+            	if (isMyServiceRunning(TaskerService.class)){
             		onServiceOff();
+            		handler.postDelayed(new Runnable(){
+						@Override
+						public void run() {
+							showIntersttial();
+						}
+            		}, 500);
+            	}
             	else
             		onServiceOn();
             }
@@ -246,10 +253,13 @@ public class TaskerActivity extends Activity {
 		//!----------------------------------AD-----------------------------------------------------!
 		/** StartAppAd object declaration */
 	private InterstitialAd interstitial;
+	boolean isInterstitialShowed = false;
 	
 	public void showIntersttial(){
-		if (interstitial !=null && interstitial.isLoaded()) {
+		if (interstitial !=null && interstitial.isLoaded() && !isInterstitialShowed) {
+			Toast.makeText(getApplicationContext(), getString(R.string.ad_message), Toast.LENGTH_LONG).show();
 			interstitial.show();
+			isInterstitialShowed = true;
 		}
 	}
 	//!----------------------------------AD-----------------------------------------------------!

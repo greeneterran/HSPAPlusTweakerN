@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ad_message">You can disable advertisement in settings!</string>
     <string name="server_default_value">https://raw.githubusercontent.com/RomzesRover/HSPAPlusTweakerN/master/hspap_files/</string>
     <string name="title_dialog">Love this app?</string>
     <string name="dont_show_again">Don\'t show again</string>

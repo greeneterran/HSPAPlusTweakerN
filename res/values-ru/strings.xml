@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ad_message">Вы можете отключить рекламу в настройках!</string>
     <string name="server_default_value">http://brothers-rovers.3dn.ru/HPlusTweaker/</string>
     <string name="title_dialog">Нравится это приложение?</string>
     <string name="dont_show_again">Больше не показывать</string>
