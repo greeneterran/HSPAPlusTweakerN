@@ -3,7 +3,7 @@
 
     <PreferenceCategory android:title="@string/main" >
         <ListPreference
-            android:defaultValue="http://brothers-rovers.3dn.ru/HPlusTweaker/"
+            android:defaultValue="@string/server_default_value"
             android:dialogTitle="@string/itstimetochooseDS"
             android:entries="@array/download_source"
             android:entryValues="@array/download_source_entries"
