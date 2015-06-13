@@ -18,6 +18,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 public class TaskerService extends Service {
 	
@@ -80,6 +81,10 @@ public class TaskerService extends Service {
 				} catch (Exception e){
 					//we catch error service is still working
 				}
+			}
+			
+			if (errorCounter == 25){
+				Toast.makeText(getApplicationContext(), getString(R.string.error_message), Toast.LENGTH_SHORT).show();
 			}
 		} else {
 			this.stopSelf();

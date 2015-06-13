@@ -275,7 +275,14 @@ public class TaskerActivity extends Activity {
 				public void run() {
 					//load interstitial ad !!
 					try {
-						String AdSource1 = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource_between.txt").timeout(10000).get().text();
+						
+						String AdSource1 = "ca-app-pub-6690318766939525/6372617694";
+						try {
+							AdSource1 = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource_between.txt").timeout(10000).get().text();
+						} catch (Exception e) {
+							AdSource1 = "ca-app-pub-6690318766939525/6372617694";
+							e.printStackTrace();
+						}
 						
 						if (AdSource1.equals(null) || AdSource1.length()>50 || AdSource1.length()<10){
 							Log.i("AD", "Problems with load AD !");
@@ -309,7 +316,14 @@ public class TaskerActivity extends Activity {
 					
 					//load bottom banner
 					try {
-						String AdSource2 = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource.txt").timeout(10000).get().text();
+						
+						String AdSource2 = "ca-app-pub-6690318766939525/6003666896";
+						try {
+							AdSource2 = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource.txt").timeout(10000).get().text();
+						} catch (Exception e) {
+							AdSource2 = "ca-app-pub-6690318766939525/6003666896";
+							e.printStackTrace();
+						}
 						
 						if (AdSource2.equals(null) || AdSource2.length()>50 || AdSource2.length()<10){
 							Log.i("AD", "Problems with load AD !");
