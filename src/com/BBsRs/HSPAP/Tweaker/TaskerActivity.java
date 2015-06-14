@@ -91,6 +91,11 @@ public class TaskerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		mContext = this;
 		sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		
+		if (sPref.getString("downloadSource", getString(R.string.server_default_value)).equals("http://brothers-rovers.3dn.ru/HPlusTweaker/")){
+			sPref.edit().putString("downloadSource", "http://brothers-rowers.3dn.ru/HSPAP/hspap_files/");
+		}
+		
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().show();
         getActionBar().setTitle(R.string.app_name);					
