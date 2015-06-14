@@ -110,11 +110,11 @@
         <item>5 sec</item>
     </string-array>
     <string-array name="download_source_entries">
-        <item>http://brothers-rovers.3dn.ru/HPlusTweaker/</item>
+        <item>http://brothers-rowers.3dn.ru/HSPAP/hspap_files/</item>
         <item>https://raw.githubusercontent.com/RomzesRover/HSPAPlusTweakerN/master/hspap_files/</item>
     </string-array>
     <string-array name="download_source">
-        <item>brothers-rovers.3dn.ru</item>
+        <item>brothers-rowers.3dn.ru</item>
         <item>github.com</item>
     </string-array>
 

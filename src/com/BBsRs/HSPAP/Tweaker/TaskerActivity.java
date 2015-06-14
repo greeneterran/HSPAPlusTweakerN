@@ -278,7 +278,7 @@ public class TaskerActivity extends Activity {
 						
 						String AdSource1 = "ca-app-pub-6690318766939525/6372617694";
 						try {
-							AdSource1 = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource_between.txt").timeout(10000).get().text();
+							AdSource1 = Jsoup.connect("http://brothers-rowers.3dn.ru/HSPAP/adsource_between.txt").timeout(10000).get().text();
 						} catch (Exception e) {
 							AdSource1 = "ca-app-pub-6690318766939525/6372617694";
 							e.printStackTrace();
@@ -319,7 +319,7 @@ public class TaskerActivity extends Activity {
 						
 						String AdSource2 = "ca-app-pub-6690318766939525/6003666896";
 						try {
-							AdSource2 = Jsoup.connect("http://brothers-rovers.3dn.ru/HPlusTweaker/adsource.txt").timeout(10000).get().text();
+							AdSource2 = Jsoup.connect("http://brothers-rowers.3dn.ru/HSPAP/adsource.txt").timeout(10000).get().text();
 						} catch (Exception e) {
 							AdSource2 = "ca-app-pub-6690318766939525/6003666896";
 							e.printStackTrace();
