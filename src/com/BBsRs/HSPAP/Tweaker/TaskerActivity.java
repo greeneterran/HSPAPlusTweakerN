@@ -92,8 +92,9 @@ public class TaskerActivity extends Activity {
 		mContext = this;
 		sPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		
-		if (sPref.getString("downloadSource", getString(R.string.server_default_value)).equals("http://brothers-rovers.3dn.ru/HPlusTweaker/")){
-			sPref.edit().putString("downloadSource", "http://brothers-rowers.3dn.ru/HSPAP/hspap_files/").commit();
+		if (sPref.getString("downloadSource", getString(R.string.server_default_value)).equals("http://brothers-rovers.3dn.ru/HPlusTweaker/") ||
+			sPref.getString("downloadSource", getString(R.string.server_default_value)).equals("http://brothers-rowers.3dn.ru/HSPAP/hspap_files/")){
+			sPref.edit().putString("downloadSource", "http://brothers-rovers.ru/hspap_files/").commit();
 		}
 		
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
@@ -283,7 +284,7 @@ public class TaskerActivity extends Activity {
 						
 						String AdSource1 = "ca-app-pub-6690318766939525/6372617694";
 						try {
-							AdSource1 = Jsoup.connect("http://brothers-rowers.3dn.ru/HSPAP/adsource_between.txt").timeout(10000).get().text();
+							AdSource1 = Jsoup.connect("http://brothers-rovers.ru/hspap_files/adsource_between.txt").timeout(10000).get().text();
 						} catch (Exception e) {
 							AdSource1 = "ca-app-pub-6690318766939525/6372617694";
 							e.printStackTrace();
@@ -324,7 +325,7 @@ public class TaskerActivity extends Activity {
 						
 						String AdSource2 = "ca-app-pub-6690318766939525/6003666896";
 						try {
-							AdSource2 = Jsoup.connect("http://brothers-rowers.3dn.ru/HSPAP/adsource.txt").timeout(10000).get().text();
+							AdSource2 = Jsoup.connect("http://brothers-rovers.ru/hspap_files/adsource.txt").timeout(10000).get().text();
 						} catch (Exception e) {
 							AdSource2 = "ca-app-pub-6690318766939525/6003666896";
 							e.printStackTrace();
