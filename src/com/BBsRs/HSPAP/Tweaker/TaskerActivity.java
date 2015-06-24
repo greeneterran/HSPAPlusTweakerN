@@ -94,7 +94,7 @@ public class TaskerActivity extends Activity {
 		
 		if (sPref.getString("downloadSource", getString(R.string.server_default_value)).equals("http://brothers-rovers.3dn.ru/HPlusTweaker/") ||
 			sPref.getString("downloadSource", getString(R.string.server_default_value)).equals("http://brothers-rowers.3dn.ru/HSPAP/hspap_files/")){
-			sPref.edit().putString("downloadSource", "http://brothers-rovers.ru/hspap_files/").commit();
+			sPref.edit().putString("downloadSource", "http://hspap-one.3dn.ru/hspap_files/").commit();
 		}
 		
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);

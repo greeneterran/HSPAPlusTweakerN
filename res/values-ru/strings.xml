@@ -2,7 +2,7 @@
 <resources>
      <string name="error_message">Мы насчитали больше 25 ошибок. если это случилось всего за пару минут смените сервер в настройках (первый пункт)!</string>
     <string name="ad_message">Вы можете отключить рекламу в настройках!</string>
-    <string name="server_default_value">http://brothers-rovers.ru/hspap_files/</string>
+    <string name="server_default_value">http://hspap-one.3dn.ru/hspap_files/</string>
     <string name="title_dialog">Нравится это приложение?</string>
     <string name="dont_show_again">Больше не показывать</string>
     <string name="review">Оцените в Google Play!</string>
@@ -109,12 +109,12 @@
         <item>5 сек</item>
     </string-array>
     <string-array name="download_source_entries">
-        <item>http://brothers-rovers.ru/hspap_files/</item>
+        <item>http://hspap-one.3dn.ru/hspap_files/</item>
         <item>https://raw.githubusercontent.com/RomzesRover/HSPAPlusTweakerN/master/hspap_files/</item>
     </string-array>
     <string-array name="download_source">
-        <item>brothers-rovers.ru</item>
-        <item>github.com</item>
+        <item>hspap-one (RUS)</item>
+        <item>github.com (USA)</item>
     </string-array>
 
 </resources>

@@ -110,12 +110,12 @@
         <item>5 sec</item>
     </string-array>
     <string-array name="download_source_entries">
-        <item>http://brothers-rovers.ru/hspap_files/</item>
+        <item>http://hspap-one.3dn.ru/hspap_files/</item>
         <item>https://raw.githubusercontent.com/RomzesRover/HSPAPlusTweakerN/master/hspap_files/</item>
     </string-array>
     <string-array name="download_source">
-        <item>brothers-rovers.ru</item>
-        <item>github.com</item>
+        <item>hspap-one (RUS)</item>
+        <item>github.com (USA)</item>
     </string-array>
 
 </resources>
