@@ -25,7 +25,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".TaskerActivity"
+            android:name="com.BBsRs.HSPAP.Tweaker.TaskerActivity"
             android:launchMode="singleInstance"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Translucent" >
@@ -36,15 +36,15 @@
             </intent-filter>
         </activity>
 
-        <service android:name="TaskerService" >
+        <service android:name="com.BBsRs.HSPAP.Tweaker.TaskerService" >
         </service>
 
         <activity
-            android:name="SettingsActivity"
+            android:name="com.BBsRs.HSPAP.Tweaker.SettingsActivity"
             android:launchMode="singleInstance" >
         </activity>
 
-        <receiver android:name="WiFiAPReceiver" >
+        <receiver android:name="com.BBsRs.HSPAP.Tweaker.WiFiAPReceiver" >
             <intent-filter>
                 <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
             </intent-filter>

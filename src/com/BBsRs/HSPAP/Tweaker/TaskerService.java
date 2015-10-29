@@ -19,6 +19,7 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
+import com.BBsRs.HSPAP.Tweaker.R;
 
 public class TaskerService extends Service {
 	

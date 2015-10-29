@@ -7,6 +7,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.widget.Toast;
 
+import com.BBsRs.HSPAP.Tweaker.R;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 

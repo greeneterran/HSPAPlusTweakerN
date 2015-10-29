@@ -42,6 +42,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.BBsRs.HSPAP.Tweaker.R;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.ads.AdRequest;
@@ -119,6 +120,7 @@ public class TaskerActivity extends Activity {
             }
             @Override
             public void onBillingInitialized() {
+            	Log.i("AD", "SHOW AD");
             	if (!bp.isPurchased(PRODUCT_ID))
             		showAd();
                 readyToPurchase = true;
@@ -143,18 +145,12 @@ public class TaskerActivity extends Activity {
             public void onClick(View v) {
             	if (isMyServiceRunning(TaskerService.class)){
             		onServiceOff();
-            		handler.postDelayed(new Runnable(){
-						@Override
-						public void run() {
-							showIntersttial();
-						}
-            		}, 500);
             	}
             	else
             		onServiceOn();
             }
         });
-		
+
 		showDialog();
 	}
 	
@@ -271,6 +267,7 @@ public class TaskerActivity extends Activity {
 	//!----------------------------------AD-----------------------------------------------------!
 	
 	public void showAd(){
+		Log.i("AD", "SHOW AD");
 		//!----------------------------------AD-----------------------------------------------------!
 		if (!bp.isPurchased(PRODUCT_ID)){
 			
@@ -428,8 +425,9 @@ public class TaskerActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-	      case R.id.menu_settings:										
+	      case R.id.menu_settings:	
 	    	  startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+	    	  showIntersttial();
 	    	  break;
 		}
 		return true;
